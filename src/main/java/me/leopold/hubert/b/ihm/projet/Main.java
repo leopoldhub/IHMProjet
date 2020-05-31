@@ -73,6 +73,10 @@ public class Main extends Application {
         taskRender.saveTask();
     }
     
+    /**
+     * Check if a timer is running
+     *
+     */
     public boolean isRunningTimer() {
     	return testTimer(treeView.getRoot());
     }

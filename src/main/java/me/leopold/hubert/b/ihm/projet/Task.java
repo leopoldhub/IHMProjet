@@ -28,32 +28,48 @@ public class Task {
 
 	@Override
 	public String toString() {
-		
 		String showTime = time <= 0?"-":""+TimeUtils.msToString(getTime());
-		
 		return name+" : "+showTime;
 	}
 
+	/**
+     * @return task duration
+     */
 	public long getTime() {
 		return time;
 	}
 
+	/**
+     * set task duration
+     */
 	public void setTime(long time) {
 		this.time = time;
 	}
 
+	/**
+     * Check if task is editable
+     */
 	public boolean isEditable() {
 		return getTree().getChildren().size() == 0;
 	}
 	
+	/**
+     * Check if timer is running
+     */
 	public boolean isRunningTimer() {
 		return runningTimer;
 	}
 
+	/**
+     * Set running timer
+     */
 	public void setRunningTimer(boolean runningTimer) {
 		this.runningTimer = runningTimer;
 	}
 
+	/**
+     * Set task name
+     */
 	public void setName(String name) {
 		this.name = name;
 		if(haveSameName()) {
@@ -61,22 +77,37 @@ public class Task {
 		}
 	}
 
+	/**
+     * @return task name
+     */
 	public String getName() {
 		return name;
 	}
 	
+	/**
+     * @return task description
+     */
 	public String getDesc() {
 		return desc;
 	}
 
+	/**
+     * Set task description
+     */
 	public void setDesc(String desc) {
 		this.desc = desc;
 	}
 
+	/**
+     * @return task tree
+     */
 	public TreeItem<Task> getTree() {
 		return tree;
 	}
 	
+	/**
+     * @return task path in tree
+     */
 	public ArrayList<String> getPath() {
 		ArrayList<String> path = new ArrayList<String>();
 		path.add(getName());
@@ -89,16 +120,25 @@ public class Task {
 		return path;
 	}
 	
+	/**
+     * @return task index in elements at same level
+     */
 	public int getTaskIndex() {
 		int index = 0;
 		if(!haveParent())return index;
 		return getTree().getParent().getChildren().indexOf(getTree());
 	}
 	
+	/**
+     * Check if task have parent in tree
+     */
 	public boolean haveParent() {
 		return getTree().getParent() != null;
 	}
 
+	/**
+     * Check if task have same name as other tasks at same level
+     */
 	public boolean haveSameName() {
 		if(!haveParent())return false;
 		for(TreeItem<Task> tsk:getTree().getParent().getChildren()) {
@@ -107,11 +147,14 @@ public class Task {
 		return false;
 	}
 	
-	public boolean addChildren(Task tsk) {
-		return addChildren(tsk,getTree().getChildren().size());
+	/**
+     * add task as child
+     */
+	public void addChild(Task tsk) {
+		addChild(tsk,getTree().getChildren().size());
 	}
 	
-	public boolean addChildren(Task tsk, int index) {
+	public void addChild(Task tsk, int index) {
 		stopTimer();
 		
 		int idx = index<0?0:index;
@@ -121,16 +164,17 @@ public class Task {
 		}else {
 			getTree().getChildren().add(idx,tsk.getTree());
 		}
-		
-		return true;
 	}
 	
-	public boolean addSim(Task tsk) {
-		if(!haveParent())return false;
-		return addSim(tsk, getTree().getParent().getChildren().size());
+	/**
+     * add task to similar level
+     */
+	public void addSim(Task tsk) {
+		if(!haveParent())return;
+		addSim(tsk, getTree().getParent().getChildren().size());
 	}
 	
-	public boolean addSim(Task tsk, int index) {
+	public void addSim(Task tsk, int index) {
 		int idx = index<0?0:index;
 		
 		if(idx >= getTree().getParent().getChildren().size()) {
@@ -138,19 +182,26 @@ public class Task {
 		}else {
 			getTree().getParent().getChildren().add(idx,tsk.getTree());
 		}
-		return true;
 	}
 	
+	/**
+     * delete task
+     */
 	public void deleteTask() {
-		if(haveParent()) {
-			getTree().getParent().getChildren().remove(getTree());
-		}
+		if(!haveParent())return;
+		getTree().getParent().getChildren().remove(getTree());
 	}
 	
+	/**
+     * start timer with actual duration
+     */
 	public boolean resumeTimer() {
 		return startTimer(time);
 	}
 	
+	/**
+     * start timer from 0
+     */
 	public boolean startTimer() {
 		return startTimer(0);
 	}
@@ -169,6 +220,9 @@ public class Task {
 		return true;
 	}
 	
+	/**
+     * stop timer
+     */
 	public boolean stopTimer() {
 		if(!this.runningTimer)return false;
 		setRunningTimer(false);

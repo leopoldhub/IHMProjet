@@ -2,6 +2,9 @@ package me.leopold.hubert.b.ihm.projet.utils;
 
 public class TimeUtils {
 
+	/**
+     * @return text translation of millis time
+     */
 	public static String msToString(long time) {
 		long seconds = time/1000;
 		int hours = (int) ((seconds-(seconds%3600))/3600);
@@ -22,6 +25,9 @@ public class TimeUtils {
 		return sb.toString();
 	}
 	
+	/**
+     * @return millis translation of text time (_h_m_s)
+     */
 	public static long stringToMs(String time) {
 		int hours = 0;
 		int min = 0;
@@ -46,6 +52,9 @@ public class TimeUtils {
 		return ftime;
 	}
 	
+	/**
+     * Check if text is numeric
+     */
 	public static boolean isNumeric(String strNum) {
 	    if (strNum == null) {
 	        return false;

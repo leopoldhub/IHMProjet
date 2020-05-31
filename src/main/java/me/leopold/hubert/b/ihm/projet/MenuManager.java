@@ -12,6 +12,9 @@ public class MenuManager {
 	MenuBar menu;
 	Menu settings;
 	
+	/**
+     * Init MenuBar
+     */
 	public MenuManager() {
 		menu = new MenuBar();
 		settings = new Menu(Main.instance.configManager.getTranslated("settings"));
@@ -33,6 +36,9 @@ public class MenuManager {
 		return menu;
 	}
 	
+	/**
+     * reload settings menu with actual languages and themes
+     */
 	public void reloadSettings() {
 		settings.getItems().clear();
 		Menu langs = new Menu(Main.instance.configManager.getTranslated("langs"));

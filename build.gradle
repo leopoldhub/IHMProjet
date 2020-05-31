@@ -39,3 +39,4 @@ shadowJar {
 }
 
 build.dependsOn(shadowJar)
+build.dependsOn(javadoc)

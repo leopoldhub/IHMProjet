@@ -117,6 +117,9 @@ public class TaskRender {
 		return group;
 	}
 	
+	/**
+     * register pane elements
+     */
 	public void registerPane() {
 		group = new AnchorPane();
 		taskName = new TextField();
@@ -253,6 +256,9 @@ public class TaskRender {
 		group.getChildren().add(stopButton);
 	}
 	
+	/**
+     * register context menu elements
+     */
 	public void registerContextMenu() {
 		rClicMenu = new ContextMenu();
 		addBeforeItem = new MenuItem(Main.instance.configManager.getTranslated("addbefore"));
@@ -300,6 +306,9 @@ public class TaskRender {
         });
 	}
 	
+	/**
+     * register system tray elements
+     */
 	public void registerSystemTray() {
 		if (SystemTray.isSupported()) {
         	
@@ -411,6 +420,9 @@ public class TaskRender {
         }
 	}
 	
+	/**
+     * save changes of actual task
+     */
 	public void saveTask() {
 		selectedTask.setName(taskName.getText());
 		selectedTask.setDesc(desc.getText());
@@ -419,6 +431,9 @@ public class TaskRender {
 		reload();
 	}
 	
+	/**
+     * reload selected task
+     */
 	public void reload() {
 		if(selectedTask == null) {
 			selectedTask = Main.instance.treeView.getRoot().getValue();
@@ -428,6 +443,9 @@ public class TaskRender {
 		setTrayTasks();
 	}
 	
+	/**
+     * set selected task
+     */
 	public void updateTask(Task task) {
 		taskName.setText(task.getName());
 		StringBuilder sb = new StringBuilder();
@@ -489,6 +507,9 @@ public class TaskRender {
 		selectedTask = task;
 	}
 	
+	/**
+     * delete selected task
+     */
 	public void delete() {
 		if(selectedTask.haveParent()) {
 			if(question(Main.instance.configManager.getTranslated("confirmdelete"), "confirmation", JOptionPane.YES_NO_OPTION) == 0) {
@@ -506,17 +527,23 @@ public class TaskRender {
 		}
 	}
 	
+	/**
+     * @return ContextMenu separator
+     */
 	public MenuItem separator() {
 		return new MenuItem("----------");
 	}
 	
+	/**
+     * reload tasks in SystemTray
+     */
 	public void setTrayTasks() {
 		displayTray.removeAll();
     	displayTray.add(trayTask(Main.instance.treeView.getRoot().getValue(), displayTray));
     	setTrayTaskRender();
     }
     
-    public Menu trayTask(Task task, Menu menu) {
+    private Menu trayTask(Task task, Menu menu) {
     	
     	Menu mn = null;
     	
@@ -548,6 +575,9 @@ public class TaskRender {
     	return mn;
     }
     
+    /**
+     * reload SystemTray selected task name
+     */
     public void setTrayTaskRender() {
     	actualTaskTray.setLabel(selectedTask.getName());
     	actualTaskTray.setName(selectedTask.getName());
@@ -556,6 +586,9 @@ public class TaskRender {
 		setTrayTimerRender();
     }
     
+    /**
+     * reload SystemTray selected task duration
+     */
     public void setTrayTimerRender() {
     	actualTimeTray.setLabel(TimeUtils.msToString(selectedTask.getTime()));
     	actualTimeTray.setName(TimeUtils.msToString(selectedTask.getTime()));
@@ -563,17 +596,23 @@ public class TaskRender {
     	actualTimeTray.setEnabled(true);
     }
     
+    /**
+     * reload TreeView items
+     */
     public void reloadTreeView() {
     	Main.instance.treeView.setRoot(Main.instance.treeView.getRoot());
     	recalculateTimes();
     	recalculateIcons();
     }
     
+    /**
+     * calculate tasks durations
+     */
     public void recalculateTimes() {
     	calculate(Main.instance.treeView.getRoot().getValue());
 	}
     
-    public long calculate(Task tsk) {
+    private long calculate(Task tsk) {
     	if(tsk.getTree().getChildren().size() > 0) {
     		long total = 0;
     		boolean valid = true;
@@ -596,6 +635,9 @@ public class TaskRender {
     	}
     }
 
+    /**
+     * reload TreeView icons
+     */
     public void recalculateIcons() {
     	calculateIcon(Main.instance.treeView.getRoot());
     	if(Main.instance.isRunningTimer()) {
@@ -605,7 +647,7 @@ public class TaskRender {
     	}
     }
     
-    public void calculateIcon(TreeItem<Task> item) {
+    private void calculateIcon(TreeItem<Task> item) {
     	if(item.getValue().getTime() > 0) {
     		item.setGraphic(new ImageView(greenIcon));
     	}else {
@@ -618,24 +660,36 @@ public class TaskRender {
     	
     }
     
+    /**
+     * start selected task timer
+     */
     public void startTimer() {
     	selectedTask.startTimer();
 		saveTask();
 		setTrayTaskRender();
     }
     
+    /**
+     * resume selected task timer
+     */
     public void resumeTimer() {
     	selectedTask.resumeTimer();
 		saveTask();
 		setTrayTaskRender();
     }
     
+    /**
+     * stop selected task timer
+     */
     public void stopTimer() {
     	selectedTask.stopTimer();
 		saveTask();
 		setTrayTaskRender();
     }
     
+    /**
+     * add new task before selected task
+     */
     public void addBefore() {
     	if(selectedTask.haveParent()) {
 			Task newTask = new Task("tsk");
@@ -645,6 +699,9 @@ public class TaskRender {
 		}
     }
     
+    /**
+     * add new task after selected task
+     */
     public void addAfter() {
     	if(selectedTask.haveParent()) {
     		Task newTask = new Task("tsk");
@@ -654,9 +711,12 @@ public class TaskRender {
 		}
     }
 	
+    /**
+     * add new task as child of selected task
+     */
     public void addSub() {
     	Task newTask = new Task("tsk");
-		selectedTask.addChildren(newTask);
+		selectedTask.addChild(newTask);
 		newTask.setName(String.format(Main.instance.configManager.getTranslated("defnewtask"),""));
 		saveTask();
     }

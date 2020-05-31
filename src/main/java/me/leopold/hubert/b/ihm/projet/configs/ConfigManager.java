@@ -14,6 +14,7 @@ import me.leopold.hubert.b.ihm.projet.Main;
 import me.leopold.hubert.b.ihm.projet.Task;
 import me.leopold.hubert.b.ihm.projet.utils.TimeUtils;
 
+
 public class ConfigManager {
 
 	public Config tasksConfig;
@@ -45,6 +46,9 @@ public class ConfigManager {
 		}
 	}
 	
+	/**
+     * Trigger when run app for the first time
+     */
 	public void firstTimeConnect() {
 		String[] lngs = new String[languages.size()];
 		for(int i = 0; i < languages.size(); i++) {
@@ -62,6 +66,9 @@ public class ConfigManager {
 		
 	}
 	
+	/**
+     * load tasks from config
+     */
 	public TreeItem<Task> loadTasksConfig() {
     	ArrayList<ArrayList<String>> keys = tasksConfig.listAllKeys();
     	
@@ -122,7 +129,7 @@ public class ConfigManager {
 	    			}
 	    			
 	    			Task t = new Task(tasks.get(i).get(tasks.get(i).size()-1));
-	    			tmp.getValue().addChildren(t);
+	    			tmp.getValue().addChild(t);
 	    			
 	    			p[p.length-1] = "description";
 	    			if(tasksConfig.haveKey(p)) {
@@ -141,6 +148,9 @@ public class ConfigManager {
     	
     }
     
+	/**
+     * save tasks in config
+     */
     public void saveTaskConfig() {
     	tasksConfig.clear();
     	svTskConfig(new ArrayList<String>(), Main.instance.treeView.getRoot());
@@ -181,6 +191,9 @@ public class ConfigManager {
     
     public String selectedLang;
     
+    /**
+     * load languages from config
+     */
     public void loadLangsConfig() {
     	ArrayList<ArrayList<String>> keys = langConfig.listAllKeys();
     	
@@ -206,6 +219,9 @@ public class ConfigManager {
 		
     }
     
+    /**
+     * get translated text from config language
+     */
     public String getTranslated(String name) {
     	if(!languages.contains(selectedLang)) {
     		JOptionPane.showMessageDialog(null, "selected language: "+selectedLang+" does not exist... changing to: "+languages.get(0), "No Languages Found", JOptionPane.ERROR_MESSAGE);
@@ -220,6 +236,9 @@ public class ConfigManager {
     	return res;
     }
     
+    /**
+     * set actual language
+     */
     public void setLang(String lang) {
     	setLang(lang, true);
     }
@@ -236,6 +255,9 @@ public class ConfigManager {
     	}
     }
     
+    /**
+     * load settings from config
+     */
     public void loadSettings() {
     	if(settingsConfig.haveKey("lang") && settingsConfig.getKey("lang") instanceof String && languages.contains(settingsConfig.getKey("lang"))) {
     		selectedLang = (String) settingsConfig.getKey("lang");
@@ -257,6 +279,9 @@ public class ConfigManager {
     
     public String selectedTheme = "classic";
     
+    /**
+     * load themes from config
+     */
     public void loadThemesConfig() {
     	ArrayList<ArrayList<String>> keys = themesConfig.listAllKeys();
     	
@@ -274,6 +299,9 @@ public class ConfigManager {
 		
     }
 
+    /**
+     * set actual theme
+     */
     public void setTheme(String theme) {
     	setTheme(theme, true);
     }
@@ -292,6 +320,10 @@ public class ConfigManager {
     
     Thread hook;
     
+    /**
+     * ask exit or restart app
+     * @param restart to specify restart or not
+     */
     public void askExit(boolean restart) {
     	if(restart) {
     		if(Main.instance.taskRender.question(Main.instance.configManager.getTranslated("restartconfirm"), "Restart", JOptionPane.YES_NO_OPTION) == 0) {
@@ -326,6 +358,9 @@ public class ConfigManager {
     	
     }
     
+    /**
+     * Check if theme have specified color property
+     */
     public boolean haveThemeColor(String name) {
     	return haveThemeColor(selectedTheme, name);
     }
@@ -334,6 +369,9 @@ public class ConfigManager {
     	return themesConfig.haveKey(theme,name);
     }
     
+    /**
+     * get theme color
+     */
     public String getThemeColor(String name) {
     	return getThemeColor(selectedTheme, name);
     }

@@ -106,6 +106,9 @@ public class Config {
 		listAllKeys();
 	}
 	
+	/**
+     * parse json config
+     */
 	private void parse() {
 		JSONParser parser = new JSONParser();
 		try {
@@ -124,6 +127,9 @@ public class Config {
 		}
 	}
 	
+	/**
+     * list all keys in config
+     */
 	public ArrayList<ArrayList<String>> listAllKeys() {
 		ArrayList<ArrayList<String>> list = new ArrayList<ArrayList<String>>();
 		if(parsed == null)return list;
@@ -137,7 +143,7 @@ public class Config {
 		return list;
 	}
 	
-	public void listKeys(Object key, ArrayList<String> skey, ArrayList<ArrayList<String>> lst){
+	private void listKeys(Object key, ArrayList<String> skey, ArrayList<ArrayList<String>> lst){
 		ArrayList<ArrayList<String>> list = lst == null?new ArrayList<ArrayList<String>>():lst;
 		if(key instanceof JSONObject) {
 			Iterator<String> keys = ((JSONObject)key).keySet().iterator();
@@ -152,6 +158,9 @@ public class Config {
 		}
 	}
 	
+	/**
+     * Check if config have key
+     */
 	public boolean haveKey(String... key) {
 		JSONObject obj = parsed;
 		for(int i = 0; i < key.length; i++) {
@@ -167,6 +176,9 @@ public class Config {
 		return true;
 	}
 	
+	/**
+     * Get config key
+     */
 	public Object getKey(String... key) {
 		if(!haveKey(key))return null;
 		JSONObject obj = parsed;
@@ -183,6 +195,9 @@ public class Config {
 		return null;
 	}
 	
+	/**
+     * Set config key
+     */
 	public void setKey(Object value, String... key) {
 		JSONObject obj = parsed;
 		for(int i = 0; i < key.length; i++) {
@@ -203,14 +218,21 @@ public class Config {
 		}
 	}
 	
+	/**
+     * Clear config
+     */
 	public void clear() {
 		parsed.clear();
 	}
 	
+	/**
+     * Save config
+     */
 	public void save() {
 		save(file);
 	}
 	
+	@Deprecated
 	public void save(File fle) {
 		try {
 	      FileWriter myWriter = new FileWriter(fle, false);
