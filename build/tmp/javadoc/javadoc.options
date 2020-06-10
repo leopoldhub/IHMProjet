@@ -1,0 +1,12 @@
+-classpath 'C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\build\\classes\\java\\main;C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\build\\resources\\main;C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\libs\\json.jar;C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\libs\\gson.jar'
+-d 'C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\build\\docs\\javadoc'
+-doctitle 'IHMProjet API'
+-quiet 
+-windowtitle 'IHMProjet API'
+'C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\src\\main\\java\\me\\leopold\\hubert\\b\\ihm\\projet\\configs\\Config.java'
+'C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\src\\main\\java\\me\\leopold\\hubert\\b\\ihm\\projet\\configs\\ConfigManager.java'
+'C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\src\\main\\java\\me\\leopold\\hubert\\b\\ihm\\projet\\Main.java'
+'C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\src\\main\\java\\me\\leopold\\hubert\\b\\ihm\\projet\\MenuManager.java'
+'C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\src\\main\\java\\me\\leopold\\hubert\\b\\ihm\\projet\\Task.java'
+'C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\src\\main\\java\\me\\leopold\\hubert\\b\\ihm\\projet\\TaskRender.java'
+'C:\\Users\\Burn\\Desktop\\POO\\eclipse-workspace\\IHMProjet\\src\\main\\java\\me\\leopold\\hubert\\b\\ihm\\projet\\utils\\TimeUtils.java'

@@ -16,9 +16,12 @@ import javax.swing.JOptionPane;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.ContextMenu;
 import javafx.scene.control.Label;
@@ -39,6 +42,7 @@ public class TaskRender {
 	
 	private TextField taskName;
 	private Label taskPath;
+	private Label subTaskChartLabel;
 	private TextArea desc;
 	private TextField time;
 	
@@ -48,6 +52,9 @@ public class TaskRender {
 	private Button runButton;
 	private Button resumeButton;
 	private Button stopButton;
+	
+	private PieChart subTaskChart;
+	private ObservableList<PieChart.Data> pieChartData;
 	
 	private Task selectedTask;
 	
@@ -212,6 +219,19 @@ public class TaskRender {
 			}
 		});
 		
+		subTaskChartLabel = new Label();
+		subTaskChartLabel.setLayoutX(10);
+		subTaskChartLabel.setLayoutY(350);
+		subTaskChartLabel.setMaxWidth(taskName.getMaxWidth());
+		subTaskChartLabel.setFont(Font.font(20));
+		subTaskChartLabel.setText(Main.instance.configManager.getTranslated("subtaskschart"));
+		
+		pieChartData = FXCollections.observableArrayList();
+		subTaskChart = new PieChart(pieChartData);
+		subTaskChart.setLayoutX(10);
+		subTaskChart.setLayoutY(360);
+		subTaskChart.setMaxHeight(300);
+		
 		String buttonStyle = "";
 		
 		if(Main.instance.configManager.haveThemeColor("buttons")) {
@@ -225,6 +245,7 @@ public class TaskRender {
 			buttonStyle += css;
 			textAreaStyle += css;
 			taskPath.setStyle(taskPath.getStyle()+css);
+			subTaskChartLabel.setStyle(subTaskChartLabel.getStyle()+css);
 		}
 		
 		if(Main.instance.configManager.haveThemeColor("textarea")) {
@@ -254,6 +275,8 @@ public class TaskRender {
 		group.getChildren().add(runButton);
 		group.getChildren().add(resumeButton);
 		group.getChildren().add(stopButton);
+		group.getChildren().add(subTaskChartLabel);
+		group.getChildren().add(subTaskChart);
 	}
 	
 	/**
@@ -504,6 +527,8 @@ public class TaskRender {
 			stopItemTray.setEnabled(false);
 		}
 		
+		setPieChart(task);
+		
 		selectedTask = task;
 	}
 	
@@ -658,6 +683,23 @@ public class TaskRender {
     		calculateIcon(items);
     	}
     	
+    }
+    
+    /**
+     *  reload piechart with new elements
+     */
+    private void setPieChart(Task task) {
+    	if(task.getTree().getChildren().size() == 0) {
+    		subTaskChart.setVisible(false);
+    		subTaskChartLabel.setVisible(false);
+    	}else {
+    		subTaskChart.setVisible(true);
+    		subTaskChartLabel.setVisible(true);
+    	}
+    	pieChartData.clear();
+    	for(TreeItem<Task> children:task.getTree().getChildren()) {
+    		pieChartData.add(new PieChart.Data(children.getValue().getName(), children.getValue().getTime()));
+    	}
     }
     
     /**

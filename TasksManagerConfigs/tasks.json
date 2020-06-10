@@ -1,0 +1,67 @@
+{
+  "Taches": {
+    "Devoirs": {
+      "Économie": {
+        "Ex3": {
+          "description": "Éxercice 3",
+          "time": ""
+        },
+        "description": "devoir d\u0027économie\nsujet: http://www.moodle.fr/xxxxxxxxx",
+        "Ex2": {
+          "description": "Éxercice 2",
+          "time": "25m49s"
+        },
+        "Ex1": {
+          "description": "Éxercice 1",
+          "time": "15m3s"
+        }
+      },
+      "description": "Devoirs a faire",
+      "IHM": {
+        "Pré-Conception": {
+          "Croquis": {
+            "description": "Pas de description",
+            "time": "15m8s"
+          },
+          "description": "Pas de description",
+          "Brain Storming": {
+            "description": "Pas de description",
+            "time": "30m29s"
+          }
+        },
+        "description": "Dm d\u0027IHM a rendre avant le 12",
+        "Conception": {
+          "Design": {
+            "description": "rendre l\u0027interface conforme aux croquis",
+            "time": "2h15m5s"
+          },
+          "description": "Pas de description",
+          "Fonctionnement": {
+            "description": "Fonctionnement basique de l\u0027application",
+            "time": "5h15m9s"
+          },
+          "Configurations": {
+            "Paramètres": {
+              "description": "Enregistrer les paramètres",
+              "time": "25s"
+            },
+            "description": "Ajouter des configurations",
+            "Languages": {
+              "description": "Ajouter différentes traductions",
+              "time": "31m25s"
+            },
+            "Taches": {
+              "description": "Enregistrer les taches",
+              "time": "25s"
+            },
+            "Thèmes": {
+              "description": "Ajouter différents thèmes",
+              "time": "25s"
+            }
+          }
+        }
+      }
+    },
+    "description": "Pas de description"
+  }
+}

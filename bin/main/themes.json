@@ -1,0 +1,14 @@
+{
+	"classic": {
+		"background":"#b0b0b0",
+		"text":"#000000",
+		"textarea":"#ffffff",
+		"buttons":"#dedede"
+	},
+	"dark": {
+		"background":"#424242",
+		"text":"#ffffff",
+		"textarea":"#808080",
+		"buttons":"#adadad"
+	}
+}

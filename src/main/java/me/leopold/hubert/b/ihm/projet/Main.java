@@ -62,7 +62,7 @@ public class Main extends Application {
         root.setTop(menuManager.get());
         root.setLeft(treeView);
         root.setCenter(taskRender.get());
-        root.setPrefSize(800, 350);  
+        root.setPrefSize(800, 600);  
         stage.setResizable(false);
         stage.setScene(new Scene(root));
         stage.setTitle("Task's Manager");
